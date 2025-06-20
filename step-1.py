@@ -46,6 +46,27 @@ def file_manager():
             path = Path(os.getcwd())
             folders = [f.name for f in path.iterdir() if f.is_dir()]
             print(folders)
+        elif choice == '6':     # Просмотр только файлов
+            files = [file.name for file in os.scandir(os.getcwd()) if file.is_file()]
+            print(f"Список всех файлов в текущей дериктории: {files}")
+        elif choice == '7':     # Просмотр инф-ии об ОП
+            from platform import system
+            print(f"Операционная система: {system()}")
+        elif choice == '8':     # Создатель программы
+            print("Создатель программы: Вадим Полянский")
+        elif choice == '9':     # Игра в викторину
+            import victory
+            print(victory.quiz())
+        elif choice == '10':     # Банковский счёт
+            import use_function
+            print(use_function.personal_account())
+        elif choice == '11':    # Смена рабочей директории
+            new_directory = input("Введите путь к новой директории: ")
+            os.chdir(new_directory)
+            print(f"Новая текущая директория: {Path.cwd()}")
+        else:
+            print("Выход")
+            break
 
 
 file_manager()
