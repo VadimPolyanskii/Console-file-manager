@@ -157,11 +157,11 @@ def raising_to_a_power(a, b):
     Возведение в степень заданного числа
     :param number: результат
     """
-    result = pow(a, b)
-    return result
+    с = pow(a, b)
+    return с
 
 
-#
+# hypot
 def calculating_hypotenuse(a, b):
     """
     Вычисление гипотенузы прямоугольного треугольника
@@ -171,6 +171,27 @@ def calculating_hypotenuse(a, b):
     """
     result = hypot(a, b)
     return result
+
+
+def working_with_coordinates(dx, dy):
+    """
+    Работа с координатами: вычисление расстояния между точками
+    :param dx: точка а
+    :param dy: точка b
+    :return: расстояние между a и b
+    """
+    distance = hypot(dx, dy)
+    return distance
+
+
+def vector_norm(vector):
+    """
+    Векторная норма
+    :param vector: Евклидова норма вектора (3, 4, 12)
+    :return: 13.0
+    """
+    norm = hypot(hypot(vector[0], vector[1], vector[2]))
+    return norm
 
 
 if __name__ == "__main__":

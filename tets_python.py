@@ -141,3 +141,16 @@ def test_raising_to_a_power():
 def test_calculating_hypotenuse():
     # Тест вычисления гмпотенузы
     assert functions_for_tests.calculating_hypotenuse(3, 4) == 5.0
+
+
+def test_working_with_coordinates():
+    # Тест вычисления расстояния между точками (1, 2) и (4, 6)
+    dx = 4 - 1
+    dy = 6 - 2
+    assert functions_for_tests.working_with_coordinates(dx, dy) == 5.0
+
+
+def test_vector_norm():
+    # Тест векторной нормы; вклидова норма вектора (3, 4, 12)
+    vector = (3, 4, 12)
+    assert functions_for_tests.vector_norm(vector) == 13.0
