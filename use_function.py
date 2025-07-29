@@ -34,40 +34,76 @@
 """
 
 
-def personal_account():
-    balance = 0             # Счёт
-    history = []            # Cписок под историю покупок
+# Инициализация класса
+class PersonalAccount:
+    def __init__(self):
+        self.balance = 0            # Начальный баланс
+        self.history = []            # История покупок (список кортежей (название, сумма)
 
-    while True:
-        print()
-        print(f'Баланс: {balance}')
-        print('1. Пополнение счёта')
-        print('2. Покупка')
-        print('3. История покупок')
-        print('4. Выход')
-        print()
+    def deposit(self, amount):
+        """Пополнение счёта."""
+        if amount <= 0:
+            raise ValueError("Сумма пополнения должна быть положительной")
+        self.balance += amount
 
-        choice = input('Выберите пункт меню: ')
-        if choice == '1':
-            summ = int(input('Введите сумму пополнения: '))
-            balance += summ            # Добавляем сумму на баланс
-        elif choice == '2':
-            sum_buy = int(input('Введите сумму покупки: '))
-            if sum_buy > balance:
-                print('Недостаточно средств!')
+    def purchase(self, name, amount):
+        """Совершение покупки."""
+        if amount <= 0:
+            raise ValueError("Сумма покупки должна быть положительной")
+        if amount > self.balance:
+            raise ValueError("Недостаточно средств")
+        self.balance -= amount
+        self.history.append((name, amount))
+
+    def get_balance(self):
+        """Получить текущий баланс."""
+        return self.balance
+
+    def get_history(self):
+        """Получить историю покупок."""
+        return self.history.copy()      # Возвращает копию списка истории (чтобы оригинальный список нельзя было изменить извне)
+
+    def run(self):
+        """Запуск интерактивного (вывода на экран) режима работы счёта."""
+        while True:
+            print()
+            print(f'Баланс: {self.balance}')
+            print('1. Пополнение счёта')
+            print('2. Покупка')
+            print('3. История покупок')
+            print('4. Выход')
+            print()
+
+            choice = input('Выберите пункт меню: ')
+            if choice == '1':
+                # Обработка ошибок
+                try:
+                    summ = int(input('Введите сумму пополнения: '))
+                    self.deposit(summ)
+                except ValueError as e:
+                    print(f"Ошибка: {e}")
+            elif choice == '2':
+                # Обработка ошибок
+                try:
+                    sum_bay = int(input('Введите сумму покупки: '))
+                    name = input('Введите название покупки: ')
+                    self.purchase(name, sum_bay)
+                except ValueError as e:
+                    print(f"Ошибка: {e}")
+            elif choice == '3':
+                print(f"История покупок {self.history}")
+            elif choice == '4':
+                break
             else:
-                name = input('Введите название покупки: ')
-                balance -= sum_buy         # Вычитаем из баланса стоимость покупки
-                history.append((name, sum_buy))    # Вносим кортеж "название + цена" в историю
-        elif choice == '3':
-            print(f'История покупок: {history}')
-        elif choice == '4':
-            break
-        else:
-            print('Неверный вариант!')
+                print("Неверный вариант")
 
 
-personal_account()
+# Код запускается только при прямом запуске файла (а не при его импорте)
+if __name__ == "__main__":
+    account = PersonalAccount()         # Создаём объект класса account
+    account.run()               # Запускается интерактивный режим объекта (вывод на экран)
+
+
 
 
 
