@@ -38,7 +38,7 @@
 class PersonalAccount:
     def __init__(self):
         self.balance = 0            # Начальный баланс
-        self.history = []            # История покупок (список кортежей (название, сумма)
+        self.history = []            # История покупок (список кортежей (название, сумма))
 
     def deposit(self, amount):
         """Пополнение счёта."""
